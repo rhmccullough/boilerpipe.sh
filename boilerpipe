@@ -1,0 +1,38 @@
+# set -x
+# KEHOME/bin/boilerpipe
+# Richard H. McCullough Oct/7/2014
+
+# Windows/Cygwin  Python3
+
+# usage: boilerpipe url [output] [extractor]
+# output ::= Text | HTML | Images
+# extractor ::= Default | Article | ArticleSentences | KeepEverything | KeepEverythingWithMinKWords | LargestContent | NumWordsRules | Canola
+# requires: Python3 with packages: jpype-py3, python-boilerpipe
+# known problems: abort on Images, KeepEverythingWithMinKwords
+
+if [ -n "$1" ]
+then url="$1"
+else echo "boilerpipe: ERROR: no URL" >&2; exit 1
+fi
+output="getText"
+if [ -n "$2" ]
+then output=get"$2"
+fi
+extractor=KeepEverythingExtractor
+if [ -n "$3" ]
+then extractor="$3"Extractor
+fi
+
+python3 <<END
+
+from boilerpipe.extract import Extractor
+
+extractor = Extractor(extractor='$extractor',url='$url')
+
+extracted_data = None
+extracted_data = extractor.$output()
+
+import sys
+sys.stdout.write(extracted_data)
+
+END

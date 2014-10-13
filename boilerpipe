@@ -1,6 +1,6 @@
 # set -x
 # KEHOME/bin/boilerpipe
-# Richard H. McCullough Oct/7/2014
+# Richard H. McCullough Oct/13/2014
 
 # Windows/Cygwin  Python3
 
@@ -10,6 +10,12 @@
 # requires: Python3 with packages: jpype-py3, python-boilerpipe
 # known problems: abort on Images, KeepEverythingWithMinKwords
 
+if [ "$1" = "-h" -o "$1" = "--help" ]
+then echo "usage: boilerpipe url [output] [extractor]"
+     echo "output ::= Text | HTML"
+     echo "extractor ::= KeepEverything | Article | ArticleSentences | Canola | Default | LargestContent | NumWordsRules"
+     exit 0
+fi
 if [ -n "$1" ]
 then url="$1"
 else echo "boilerpipe: ERROR: no URL" >&2; exit 1

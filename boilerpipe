@@ -1,6 +1,6 @@
 # set -x
 # KEHOME/bin/boilerpipe
-# Richard H. McCullough Oct/13/2014
+# Richard H. McCullough Oct/25/2014
 
 # Windows/Cygwin  Python3
 
@@ -13,7 +13,7 @@
 if [ "$1" = "-h" -o "$1" = "--help" ]
 then echo "usage: boilerpipe url [output] [extractor]"
      echo "output ::= Text | HTML"
-     echo "extractor ::= KeepEverything | Article | ArticleSentences | Canola | Default | LargestContent | NumWordsRules"
+     echo "extractor ::= Default | Article | ArticleSentences | Canola | KeepEverything | LargestContent | NumWordsRules"
      exit 0
 fi
 if [ -n "$1" ]
@@ -24,7 +24,7 @@ output="getText"
 if [ -n "$2" ]
 then output=get"$2"
 fi
-extractor=KeepEverythingExtractor
+extractor=DefaultExtractor
 if [ -n "$3" ]
 then extractor="$3"Extractor
 fi
